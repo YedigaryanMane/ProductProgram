@@ -37,6 +37,7 @@ namespace ConsoleApp78
         public override int Id { get ; set ; }
         public override string Name { get; set; }
         public override decimal Price { get ; set ; }
+
         public const string CONNECTION_STRING = "Data Source=.;Initial Catalog=StoreeDb;Integrated Security=True;Encrypt=False";
 
         public ProductCollection(int id, string name, decimal price)
@@ -56,7 +57,6 @@ namespace ConsoleApp78
                 {
                     command.Connection = conn;
                     command.CommandText = "insert into Productt values(@Id,@Name,@Price )";
-
                     command.Parameters.Add(new SqlParameter("@Id",product.Id));
                     command.Parameters.Add(new SqlParameter("@Name",product.Name));
                     command.Parameters.Add(new SqlParameter("@Price",product.Price));
@@ -75,7 +75,6 @@ namespace ConsoleApp78
                 {
                     command.Connection = conn;
                     command.CommandText = "delete from Productt where id = @Id";
-
                     command.Parameters.Add(new SqlParameter("@Id", id));
                     
                     command.ExecuteNonQuery();
@@ -146,7 +145,6 @@ namespace ConsoleApp78
                 {
                     command.Connection = conn;
                     command.CommandText = "update Productt set Id = @Id,Name = @Name, Price = @Price )";
-
                     command.Parameters.Add(new SqlParameter("@Id", product.Id));
                     command.Parameters.Add(new SqlParameter("@Name", product.Name));
                     command.Parameters.Add(new SqlParameter("@Price", product.Price));
@@ -204,7 +202,6 @@ namespace ConsoleApp78
                 {
                     command.Connection = conn;
                     command.CommandText = "insert into Orders values(@OrderId,@Product,@Quantity,@TotalAmount)";
-
                     command.Parameters.Add(new SqlParameter("@OrderId", order.OrderID));
                     command.Parameters.Add(new SqlParameter("@Product", order.Product));
                     command.Parameters.Add(new SqlParameter("@Quantity", order.Quantity));
@@ -224,7 +221,6 @@ namespace ConsoleApp78
                 {
                     command.Connection = conn;
                     command.CommandText = "delete from Orders where id = @OrderId";
-
                     command.Parameters.Add(new SqlParameter("@OrderId", id));
 
                     command.ExecuteNonQuery();
@@ -253,9 +249,7 @@ namespace ConsoleApp78
                             order.Quantity = int.Parse(reader["@Quantity"].ToString());
                             order.TotalAmount = int.Parse(reader["@TotalAmount"].ToString());
                         }
-
                     }
-
                 }
                 return order;
             }
